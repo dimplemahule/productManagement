@@ -5,7 +5,7 @@ const orderController = require("../controller/orderController")
 const cartController = require("../controller/cartController")
 const productController = require("../controller/productController")
 const userController = require("../controller/userController")
-const middleware = require("../middleware/auth")
+const middleware = require("../middleware/auth")//9330918239
 
 //--------------------for user--------------------
 router.post('/register', userController.createUser);

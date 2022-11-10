@@ -90,7 +90,6 @@ const updateOrder = async (req, res) => {
     } else {
       conditions.status = data.status;
     }
-
     let resData = await orderModel.findByIdAndUpdate({ _id: findOrder._id }, conditions, { new: true })
     res.status(200).send({ status: true, message: "Success", data: resData });
   }

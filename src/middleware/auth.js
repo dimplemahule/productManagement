@@ -10,12 +10,12 @@ const authentication = (req, res, next) => {
     if (typeof bearerHeader == "undefined") return res.status(400).send({ status: false, message: "Token is missing" });
 
     let bearerToken = bearerHeader.split(' ')
-    let token = bearerToken[1];
+    let token = bearerToken[1];// to find position
     jwt.verify(token, "Project5", function (err, data) {
       if (err) {
         return res.status(400).send({ status: false, message: err.message })
       } else {
-        req.decodedToken = data;
+        req.decodedToken = data; //custom attribute in array for the authorization purpose
         next()
       }
     });
@@ -38,7 +38,7 @@ const authorization = async (req, res, next) => {
     }
 
     if (!loginUser) return res.status(400).send({ status: false, message: "User-id is required" })
-
+    //add controller in line no 42
     if (loggedInUser !== loginUser) return res.status(403).send({ status: false, message: "Error!! authorization failed" });
     next();
   } catch (err) {

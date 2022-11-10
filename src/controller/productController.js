@@ -7,7 +7,7 @@ const { isValidName, isValidObjectId, isValid, isValidNumber } = require('../val
 const createProduct = async function (req, res) {
     try {
         let data = req.body
-        let { title, description, price, currencyId, currencyFormat, isFreeShipping, style } = data
+        let { title, description, price, currencyId, currencyFormat, isFreeShipping, style } = data//destrue of data
 
         //------------------validation for request body------------------
         if (Object.keys(data).length < 1) { return res.status(400).send({ status: false, message: "Data is required to create a product" }) }
@@ -33,7 +33,7 @@ const createProduct = async function (req, res) {
         if (currencyFormat != "₹") { return res.status(400).send({ status: false, message: "Currency must be in ₹ only" }) }
 
         //------------------validation for product image------------------
-        let productImage = req.files
+        let productImage = req.files// files is a request body
         if (!(productImage && productImage.length)) { return res.status(400).send({ status: false, message: " Please Provide The Product Image" }) }
         const uploadedproductImage = await uploadFile(productImage[0])
         data.productImage = uploadedproductImage
@@ -79,7 +79,7 @@ const getProduct = async function (req, res) {
 
             let { name, size, priceSort, priceGreaterThan, priceLessThan } = data
 
-            //------------------if we want to filter through title (name)------------------
+            //------------------if we want to filter through title (name)-Dyanamial filter-----------------
             if (name) {
                 if (!isValid(name)) { return res.status(400).send({ status: false, message: "Enter product name" }) }
                 filter['title'] = name

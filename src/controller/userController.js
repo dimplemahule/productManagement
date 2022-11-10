@@ -62,7 +62,7 @@ const createUser = async function (req, res) {
         data.profileImage = uploadedProfileImage
 
         //-----------------------hashing the password with bcrypt------------------
-        data.password = await bcrypt.hash(data.password, 10);
+        data.password = await bcrypt.hash(data.password, 10); //encrption
 
         let savedata = await userModel.create(data)
         return res.status(201).send({ status: true, message: 'User created successfully', data: savedata })
@@ -85,7 +85,7 @@ const loginUser = async function (req, res) {
         if (!user) { return res.status(404).send({ status: false, msg: "Incorrect Email" }) }
 
         //--------------------password checking-------------------
-        let actualPassWord = await bcrypt.compare(password, user.password);
+        let actualPassWord = await bcrypt.compare(password, user.password);//encrypt karke compare kar sakte hai
         if (!actualPassWord) return res.status(400).send({ status: false, message: "Incorrect password" })
 
         let userId = user._id
